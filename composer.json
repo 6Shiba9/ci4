@@ -1,0 +1,11 @@
+{
+    "name": "cuter/hmvc-template-main",
+    "autoload": {
+        "psr-4": {
+            "Cuter\\HmvcTemplateMain\\": "src/"
+        }
+    },
+    "require": {
+        "mpdf/mpdf": "^8.2"
+    }
+}
