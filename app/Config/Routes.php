@@ -16,15 +16,27 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * Router Setup
  * --------------------------------------------------------------------
  */
-$routes->setDefaultNamespace('Modules\Users\Controllers');
-$routes->setDefaultController('User');
+$routes->setDefaultNamespace('Modules\Login\Controllers');
+$routes->setDefaultController('Login');
 $routes->setDefaultMethod('index');
 $routes->setTranslateURIDashes(false);
 $routes->set404Override();
 $routes->setAutoRoute(true);
 
 
-$routes->group('Manage', ['namespace' => 'Modules\Users\Controllers'], function ($routes) {
+$routes->group('page', ['namespace' => 'Modules\Login\Controllers'], function ($routes) {
+
+    $routes->get('login','Login::index');
+    $routes->post('auth','Login::auth');
+    $routes->get('register','Register::index');
+    $routes->post('save_data', 'Register::save');
+
+});
+
+
+
+$routes->group('Manage', ['namespace' => 'Modules\Users\Controllers', 'filter' => 'auth'], function ($routes) {
+
     $routes->get('namelist', 'User::index'); // แสดงรายการชื่อทั้งหมด
     $routes->get('addname', 'User::createdata'); // แสดงหน้าเพิ่มชื่อใหม่
     $routes->post('submit-form', 'User::store');// บันทึก
@@ -32,6 +44,7 @@ $routes->group('Manage', ['namespace' => 'Modules\Users\Controllers'], function 
     $routes->post('update-form', 'User::update_data');// แก้ไข
     $routes->get('deletdata/(:num)', 'User::deletedata/$1');// ลบชื่อ
     $routes->get('generate', 'User::generate');// สร้าง pdf
+
 });
 /*
  * --------------------------------------------------------------------

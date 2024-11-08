@@ -4,7 +4,6 @@ namespace Modules\Users\Controllers;
 
 use App\Controllers\BaseController;
 use Modules\Users\Models\User_model;
-use Mpdf\Mpdf;
 
 class User extends BaseController
 {
